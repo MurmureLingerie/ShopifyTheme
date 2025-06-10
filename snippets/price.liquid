@@ -1,0 +1,62 @@
+<div class="price
+  {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+  {%- if product.price_varies %} price--varies{% endif -%}
+  {%- if product.compare_at_price > product.price %} price--on-sale{% endif -%}
+  {%- if product.price == 0 and product.price_varies == false %} price--sold-out{% endif -%}">
+  
+  <div class="price__container">
+    {%- comment -%}
+      Prix de vente
+    {%- endcomment -%}
+    <div class="price__regular">
+      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="price-item price-item--regular">
+        {% if product.price_varies %}
+          À partir de {{ product.price_min | money }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      </span>
+    </div>
+
+    {%- comment -%}
+      Prix comparé (prix barré)
+    {%- endcomment -%}
+    <div class="price__sale">
+      {%- unless product.price_varies == false and product.compare_at_price_varies %}
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+        <span>
+          <s class="price-item price-item--regular">
+            {% if product.compare_at_price_varies %}
+              {{ product.compare_at_price_max | money }}
+            {% else %}
+              {{ product.compare_at_price | money }}
+            {% endif %}
+          </s>
+        </span>
+      {%- endunless -%}
+    </div>
+    
+    <div class="price__badges">
+      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+        {%- if settings.sale_badge_color_scheme != 'background-1'-%}
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 13 13">
+            <text x="6.5" y="10.13" class="color-foreground" fill="currentColor" text-anchor="middle">{{ 'products.product.on_sale' | t }}</text>
+          </svg>
+        {%- else -%}
+          {{ 'products.product.on_sale' | t }}
+        {%- endif -%}
+      </span>
+
+      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+        {%- if settings.sold_out_badge_color_scheme != 'background-1'-%}
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 13 13">
+            <text x="6.5" y="10.13" class="color-foreground" fill="currentColor" text-anchor="middle">{{ 'products.product.sold_out' | t }}</text>
+          </svg>
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+    </div>
+  </div>
+</div>
