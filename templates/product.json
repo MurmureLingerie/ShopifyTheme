@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": [
+        {
+          "type": "title",
+          "id": "title"
+        },
+        {
+          "type": "price",
+          "id": "price"
+        },
+        {
+          "type": "variant_picker",
+          "id": "variant_picker"
+        },
+        {
+          "type": "quantity_selector",
+          "id": "quantity_selector"
+        },
+        {
+          "type": "buy_buttons",
+          "id": "buy_buttons"
+        },
+        {
+          "type": "description",
+          "id": "description"
+        }
+      ]
+    },
+    "product-recommendations": {
+      "type": "product-recommendations"
+    }
+  },
+  "order": ["main", "product-recommendations"]
+}
