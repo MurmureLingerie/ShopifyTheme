@@ -1,0 +1,133 @@
+<footer class="footer">
+  <div class="page-width">
+    <div class="footer__content-top">
+      <div class="grid grid--4-col">
+        <!-- Informations boutique -->
+        <div class="footer__block">
+          <h3 class="footer__heading">{{ shop.name }}</h3>
+          {% if section.settings.footer_description != blank %}
+            <p>{{ section.settings.footer_description }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Liens rapides -->
+        <div class="footer__block">
+          <h3 class="footer__heading">Liens rapides</h3>
+          <ul class="list-unstyled">
+            {% for link in linklists.footer.links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Support client -->
+        <div class="footer__block">
+          <h3 class="footer__heading">Support</h3>
+          <ul class="list-unstyled">
+            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/pages/faq">FAQ</a></li>
+            <li><a href="/pages/livraison">Livraison</a></li>
+            <li><a href="/pages/retours">Retours</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer__block">
+          <h3 class="footer__heading">Newsletter</h3>
+          <p>Recevez nos dernières nouveautés</p>
+          {% form 'customer' %}
+            <div class="newsletter-form">
+              <input type="email" 
+                     name="contact[email]" 
+                     placeholder="Votre email" 
+                     class="field__input"
+                     required>
+              <button type="submit" class="button button--secondary">
+                S'abonner
+              </button>
+            </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer__content-bottom">
+      <div class="footer__copyright">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Tous droits réservés.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer__content-top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer__heading {
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .footer .list-unstyled {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer .list-unstyled li {
+    margin-bottom: 0.5rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .newsletter-form .field__input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 4px;
+  }
+
+  .newsletter-form .field__input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .footer__copyright {
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-form {
+      flex-direction: column;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "footer_description",
+      "label": "Description de la boutique",
+      "default": "Découvrez notre collection de lingerie élégante et raffinée."
+    }
+  ]
+}
+{% endschema %}
