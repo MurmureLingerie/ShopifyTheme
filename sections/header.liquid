@@ -1,0 +1,84 @@
+<header class="header-wrapper">
+  <div class="header page-width">
+    <!-- Logo -->
+    <div class="header__logo">
+      {% if settings.logo != blank %}
+        <a href="{{ routes.root_url }}" class="header__heading-link">
+          {{ settings.logo | image_url: width: settings.logo_width | image_tag: 
+             class: 'header__logo-image',
+             alt: shop.name,
+             width: settings.logo_width
+          }}
+        </a>
+      {% else %}
+        <a href="{{ routes.root_url }}" class="header__heading-link">
+          <h1 class="header__heading">{{ shop.name }}</h1>
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Navigation -->
+    <nav class="header__menu">
+      <ul class="list-menu">
+        {% for link in linklists.main-menu.links %}
+          <li class="list-menu__item">
+            <a href="{{ link.url }}" class="list-menu__item--link">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- Icons -->
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}" class="header__icon header__icon--search">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </a>
+      
+      <a href="{{ routes.account_url }}" class="header__icon header__icon--account">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="m16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        {% if cart.item_count > 0 %}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 150,
+      "unit": "px",
+      "label": "Logo width"
+    }
+  ]
+}
+{% endschema %}
