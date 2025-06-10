@@ -1,0 +1,56 @@
+{
+  "general": {
+    "404": {
+      "title": "Page introuvable",  
+      "subtext": "La page que vous recherchez n'existe pas."
+    },
+    "accessibility": {
+      "skip_to_text": "Passer au contenu"
+    },
+    "meta": {
+      "tags": "Mots-clés \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Rechercher",
+      "no_results": "Aucun résultat trouvé",
+      "results_for": "Résultats pour \"{{ terms }}\""
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "description": "Description",
+      "on_sale": "Promo",
+      "sold_out": "Épuisé",
+      "unavailable": "Non disponible",
+      "vendor": "Marque",
+      "quantity": "Quantité",
+      "price": {
+        "from_price_html": "À partir de {{ price }}",
+        "regular_price": "Prix habituel",
+        "sale_price": "Prix de vente"
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart_count": {
+        "one": "{{ count }} article",
+        "other": "{{ count }} articles"
+      }
+    }
+  },
+  "templates": {
+    "cart": {
+      "cart": "Panier"
+    },
+    "collection": {
+      "filters": {
+        "title_tags": "Filtrer",
+        "all_tags": "Tous les produits"
+      }
+    }
+  }
+}
