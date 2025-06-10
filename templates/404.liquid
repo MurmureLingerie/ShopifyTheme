@@ -1,0 +1,19 @@
+<div class="section">
+  <div class="page-width text-center">
+    <h1>{{ 'general.404.title' | t | default: 'Page introuvable' }}</h1>
+    <p>{{ 'general.404.subtext' | t | default: 'La page que vous recherchez n\'existe pas.' }}</p>
+    <a href="{{ routes.root_url }}" class="button">
+      Retour à l'accueil
+    </a>
+  </div>
+</div>
+
+<style>
+  .section {
+    padding: 4rem 0;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
