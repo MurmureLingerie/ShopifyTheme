@@ -1,6 +1,70 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<div class="section">
+  <div class="page-width">
+    <h1>Votre panier</h1>
+    
+    {% if cart.item_count == 0 %}
+      <div class="cart-empty text-center">
+        <h2>Votre panier est vide</h2>
+        <p>Découvrez nos produits et ajoutez-les à votre panier.</p>
+        <a href="/collections" class="button">Continuer les achats</a>
+      </div>
+    {% else %}
+      <div class="cart-items">
+        {% for item in cart.items %}
+          <div class="cart-item">
+            <div class="cart-item__media">
+              {% if item.image %}
+                {{ item.image | image_url: width: 100 | image_tag: alt: item.title }}
+              {% endif %}
+            </div>
+            
+            <div class="cart-item__details">
+              <h3>{{ item.product.title }}</h3>
+              {% if item.variant.title != 'Default Title' %}
+                <p>{{ item.variant.title }}</p>
+              {% endif %}
+              <p>{{ item.price | money }} × {{ item.quantity }}</p>
+            </div>
+            
+            <div class="cart-item__total">
+              {{ item.line_price | money }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
   }
+  
+  .cart-item__media img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .cart-item__details {
+    flex: 1;
+  }
+  
+  .cart-item__total {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart Items",
+  "settings": []
+}
 {% endschema %}
