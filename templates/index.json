@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "title": "Collection Élégante",
+        "subtitle": "Découvrez notre sélection de lingerie raffinée",
+        "button_text": "Découvrir",
+        "button_link": "/collections/all"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Nos Favoris",
+        "collection": "",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["hero", "featured-collection"]
+}
