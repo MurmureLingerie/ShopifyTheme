@@ -1,6 +1,95 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<div class="section">
+  <div class="page-width">
+    <div class="product grid grid--2-col">
+      <!-- Images produit -->
+      <div class="product__media">
+        {% if product.media.size > 0 %}
+          <div class="product__media-wrapper">
+            {% for media in product.media limit: 5 %}
+              {% case media.media_type %}
+                {% when 'image' %}
+                  <div class="product__media-item">
+                    {{ media | image_url: width: 600 | image_tag: alt: media.alt }}
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'product__media-placeholder' }}
+        {% endif %}
+      </div>
+
+      <!-- Info produit -->
+      <div class="product__info">
+        <h1 class="product__title">{{ product.title }}</h1>
+        
+        <div class="product__price">
+          {% render 'price', product: product %}
+        </div>
+
+        {% if product.description != blank %}
+          <div class="product__description">
+            {{ product.description }}
+          </div>
+        {% endif %}
+
+        <!-- Formulaire d'achat -->
+        {% form 'product', product, id: 'ProductForm', class: 'product-form' %}
+          <div class="product-form__buttons">
+            <button type="submit" name="add" class="button product-form__cart-submit" 
+                    {% if product.available == false %}disabled{% endif %}>
+              <span>
+                {% if product.available %}
+                  Ajouter au panier
+                {% else %}
+                  Épuisé
+                {% endif %}
+              </span>
+            </button>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product {
+    gap: 3rem;
+    margin: 2rem 0;
   }
+  
+  .product__media-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .product__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .product__price {
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+  }
+  
+  .product__description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .product-form__cart-submit {
+    width: 100%;
+    max-width: 300px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
 {% endschema %}
