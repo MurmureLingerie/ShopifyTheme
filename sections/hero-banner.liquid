@@ -1,0 +1,64 @@
+<div class="hero section" 
+     {% if section.settings.image %}
+       style="background-image: url('{{ section.settings.image | img_url }}')"
+     {% else %}
+       style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+     {% endif %}>
+  
+  <div class="hero__content page-width">
+    {% if section.settings.title != blank %}
+      <h1 class="hero__title">{{ section.settings.title }}</h1>
+    {% endif %}
+    
+    {% if section.settings.subtitle != blank %}
+      <p class="hero__text">{{ section.settings.subtitle }}</p>
+    {% endif %}
+    
+    {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="button">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image de fond"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre principal",
+      "default": "Collection Élégante"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "default": "Découvrez notre sélection de lingerie raffinée"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texte du bouton",
+      "default": "Découvrir"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Lien du bouton"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}
