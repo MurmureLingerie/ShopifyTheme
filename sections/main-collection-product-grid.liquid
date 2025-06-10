@@ -1,6 +1,26 @@
+<div class="section">
+  <div class="page-width">
+    {% if collection.products.size > 0 %}
+      <div class="grid grid--4-col">
+        {% for product in collection.products %}
+          <div class="card-wrapper">
+            {% render 'product-card', product: product %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-collection text-center">
+        <h2>Cette collection est vide</h2>
+        <p>Aucun produit trouvé dans cette collection.</p>
+        <a href="/collections" class="button">Voir toutes les collections</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Collection Products",
+  "settings": []
+}
 {% endschema %}
